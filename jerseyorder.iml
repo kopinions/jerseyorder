@@ -43,6 +43,13 @@
     <orderEntry type="library" scope="TEST" name="grizzly-http-servlet-2.3.8" level="project" />
     <orderEntry type="library" exported="" name="javax.annotation-api-1.2" level="project" />
     <orderEntry type="library" exported="" name="grizzly-framework-2.3.8" level="project" />
+    <orderEntry type="library" exported="" name="jackson-annotations-2.3.2" level="project" />
+    <orderEntry type="library" exported="" name="jackson-jaxrs-base-2.3.2" level="project" />
+    <orderEntry type="library" exported="" name="jersey-media-json-jackson-2.9" level="project" />
+    <orderEntry type="library" exported="" name="jackson-module-jaxb-annotations-2.3.2" level="project" />
+    <orderEntry type="library" exported="" name="jackson-databind-2.3.2" level="project" />
+    <orderEntry type="library" exported="" name="jackson-jaxrs-json-provider-2.3.2" level="project" />
+    <orderEntry type="library" exported="" name="jackson-core-2.3.2" level="project" />
   </component>
 </module>
 

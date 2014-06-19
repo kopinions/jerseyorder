@@ -1,17 +1,18 @@
 package com.thoughtworks.com;
 
 import javax.ws.rs.ext.Provider;
-import java.util.List;
 
 @Provider
-public class ProductsRefJson {
+public class ProductsRefJson  {
 
-    private List<Product> productList;
+    private Product product;
 
 
-    public ProductsRefJson(List<Product> productList) {
-        this.productList = productList;
+    public ProductsRefJson(Product product) {
+        this.product = product;
     }
 
-
+    public Long getId() {
+        return product.getId();
+    }
 }

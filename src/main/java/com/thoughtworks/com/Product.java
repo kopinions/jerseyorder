@@ -1,12 +1,5 @@
 package com.thoughtworks.com;
 
-/**
- * Created with IntelliJ IDEA.
- * User: twer
- * Date: 6/19/14
- * Time: 10:29 AM
- * To change this template use File | Settings | File Templates.
- */
 public class Product {
     private String name;
     private Long id;

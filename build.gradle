@@ -15,9 +15,7 @@ ext {
 dependencies {
     compile 'javax.ws.rs:javax.ws.rs-api:2.0'
 
-
-    compile "org.codehaus.jackson:jackson-mapper-asl:$jacksonVersion"
-    compile "org.codeehaus.jackson:jackson-core-asl:$jacksonVersion"
+    compile "org.glassfish.jersey.media:jersey-media-json-jackson:2.9"
 
     compile "org.glassfish.jersey.core:jersey-server:$jerseyVersion"
     compile "org.glassfish.jersey.containers:jersey-container-grizzly2-http:$jerseyVersion"

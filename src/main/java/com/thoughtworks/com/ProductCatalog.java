@@ -3,12 +3,10 @@ package com.thoughtworks.com;
 import java.util.ArrayList;
 import java.util.List;
 
-public interface ProductCatalog {
+public class ProductCatalog implements IProductsCatalog{
 
     private List<Product> products = new ArrayList<>();
 
-    public ProductCatalog() {
-    }
 
 
     public Product create(String name) {
@@ -27,9 +25,9 @@ public interface ProductCatalog {
         return products;
     }
 
-    public Product find(long id) throws ResourceNotFoundException {
+    public Product find(long id) {
         if(products.stream().noneMatch(p->p.getId() == id)) {
-            throw new ResourceNotFoundException();
+            return null;
         }
         return products.stream().filter(p -> p.getId() == id).findFirst().get();
     }

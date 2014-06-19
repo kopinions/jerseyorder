@@ -5,21 +5,23 @@ import javax.ws.rs.GET;
 import javax.ws.rs.Path;
 import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
+import java.util.List;
+import java.util.stream.Collectors;
 
 @Path("/products")
 public class ProductsResource {
 
     @Inject
-    ProductCatalog catalog;
-
-    @Path("{id}/prices")
-    public PriceResource getPrices() {
-        return new PriceResource();
-    }
+    IProductsCatalog catalog;
+//
+//    @Path("{id}/prices")
+//    public PriceResource getPrices() {
+//        return new PriceResource();
+//    }
 
     @GET
     @Produces(MediaType.APPLICATION_JSON)
-    public ProductsRefJson getProductList() {
-        return new ProductsRefJson(catalog.getProductList());
+    public List<ProductsRefJson> getProductList() {
+        return catalog.getProductList().stream().map(ProductsRefJson::new).collect(Collectors.toList());
     }
 }

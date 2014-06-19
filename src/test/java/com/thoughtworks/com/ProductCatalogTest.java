@@ -20,10 +20,6 @@ public class ProductCatalogTest {
     public void should_find_product_by_id() {
         ProductCatalog productCatalog = new ProductCatalog();
         productCatalog.create("name1");
-        try {
             assertThat(productCatalog.find(1).getId(), is(1l));
-        } catch (ResourceNotFoundException e) {
-            e.printStackTrace();  //To change body of catch statement use File | Settings | File Templates.
-        }
     }
 }
