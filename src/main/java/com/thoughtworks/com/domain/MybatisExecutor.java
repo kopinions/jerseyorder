@@ -29,7 +29,6 @@ public class MybatisExecutor {
         TransactionFactory transactionFactory = new JdbcTransactionFactory();
         Environment environment = new Environment("development", transactionFactory, source);
         Configuration configuration = new Configuration(environment);
-        configuration.getTypeAliasRegistry().registerAlias(Product.class);
         configuration.addMapper(ProductMapper.class);
         sqlSessionFactory = new SqlSessionFactoryBuilder().build(configuration);
     }

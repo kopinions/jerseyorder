@@ -1,5 +1,6 @@
 package com.thoughtworks.com.domain;
 
+import com.thoughtworks.com.mapper.ProductHandler;
 import org.apache.ibatis.session.SqlSession;
 
 import java.util.List;
@@ -16,7 +17,9 @@ public class ProductCatalog implements IProductsCatalog {
     }
 
     public List<Product> getProductList() {
-        return session.selectList("com.thoughtworks.com.mapper.ProductMapper.all");
+        ProductHandler handler = new ProductHandler();
+        session.select("com.thoughtworks.com.mapper.ProductMapper.all", handler);
+        return handler.all();
     }
 
     public Product find(long id) {

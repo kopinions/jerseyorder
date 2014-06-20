@@ -19,4 +19,7 @@ public class Price {
         this.time = time;
         this.price = price;
     }
+
+    public Price() {
+    }
 }

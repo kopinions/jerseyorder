@@ -1,0 +1,1 @@
+alter table products add primary key (id);

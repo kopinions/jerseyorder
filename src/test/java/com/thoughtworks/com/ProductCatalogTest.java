@@ -1,6 +1,7 @@
 package com.thoughtworks.com;
 
 import com.thoughtworks.com.domain.MybatisExecutor;
+import com.thoughtworks.com.domain.Price;
 import com.thoughtworks.com.domain.Product;
 import com.thoughtworks.com.domain.ProductCatalog;
 import org.apache.ibatis.session.SqlSession;
@@ -16,13 +17,12 @@ public class ProductCatalogTest {
     public void should_get_product_list() {
         SqlSession session = new MybatisExecutor().getSession();
         ProductCatalog productCatalog = new ProductCatalog(session);
-//        productCatalog.create("name1");
-//        productCatalog.create("name2");
-//        productCatalog.create("name3");
-
         List<Product> productList = productCatalog.getProductList();
         assertThat(productList.size(), is(3));
-        assertThat(productList.get(0).getId(), is(1L));
+        assertThat(productList.stream().anyMatch(p -> p.getId() == 1), is(true));
+
+        List<Price> historyPriceForProduct1 = productList.stream().filter(p -> p.getId() == 1).findFirst().get().getHistoryPrice();
+        assertThat(historyPriceForProduct1.stream().allMatch(p->p.productId==1), is(true));
     }
 //
 //    @Test
