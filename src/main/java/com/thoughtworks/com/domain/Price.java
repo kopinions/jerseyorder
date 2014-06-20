@@ -10,7 +10,7 @@ import java.util.Date;
  * To change this template use File | Settings | File Templates.
  */
 public class Price {
-    public long productId;
+    private long productId;
     private Date time;
     private double price;
 
@@ -21,5 +21,13 @@ public class Price {
     }
 
     public Price() {
+    }
+
+    public double getPrice() {
+        return price;
+    }
+
+    public long getProductId() {
+        return productId;
     }
 }

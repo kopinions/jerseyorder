@@ -1,6 +1,5 @@
-package com.thoughtworks.com;
+package com.thoughtworks.com.api;
 
-import com.thoughtworks.com.api.ProductsResource;
 import com.thoughtworks.com.domain.IProductsCatalog;
 import com.thoughtworks.com.domain.Product;
 import com.thoughtworks.com.domain.ProductCatalog;

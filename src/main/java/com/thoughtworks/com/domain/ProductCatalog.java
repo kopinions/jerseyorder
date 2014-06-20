@@ -3,8 +3,9 @@ package com.thoughtworks.com.domain;
 import com.thoughtworks.com.mapper.ProductHandler;
 import org.apache.ibatis.session.SqlSession;
 
+import javax.ws.rs.ext.Provider;
 import java.util.List;
-
+@Provider
 public class ProductCatalog implements IProductsCatalog {
     private final SqlSession session;
 

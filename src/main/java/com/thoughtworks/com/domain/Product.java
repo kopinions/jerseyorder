@@ -7,12 +7,13 @@ import java.util.List;
 public class Product {
     private String name;
     private Long id;
-    private List<Price> historyPrices = new ArrayList<>();
+    private List<Price> historyPrices;
 //    private Price currentPrice;
 
     public Product(String name, long id) {
         this.name = name;
         this.id = id;
+        historyPrices = new ArrayList<>();
     }
 
     public Product() {
@@ -28,5 +29,9 @@ public class Product {
 
     public List<Price> getHistoryPrice() {
         return historyPrices;
+    }
+
+    public String getName() {
+        return name;
     }
 }

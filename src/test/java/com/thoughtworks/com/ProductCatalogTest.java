@@ -22,7 +22,7 @@ public class ProductCatalogTest {
         assertThat(productList.stream().anyMatch(p -> p.getId() == 1), is(true));
 
         List<Price> historyPriceForProduct1 = productList.stream().filter(p -> p.getId() == 1).findFirst().get().getHistoryPrice();
-        assertThat(historyPriceForProduct1.stream().allMatch(p->p.productId==1), is(true));
+        assertThat(historyPriceForProduct1.stream().allMatch(p-> p.getProductId() ==1), is(true));
     }
 //
 //    @Test

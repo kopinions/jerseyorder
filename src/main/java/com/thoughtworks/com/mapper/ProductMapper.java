@@ -10,7 +10,7 @@ public interface ProductMapper {
     Product find(int id);
 
     @Select("SELECT * FROM products a left join prices b on a.id=b.productId")
-    List<ProductWithPrice> all(ProductHandler handler);
+    List<ProductWithPrice   > all(ProductHandler handler);
 
 
     @Select("show databases")
