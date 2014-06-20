@@ -1,4 +1,6 @@
-package com.thoughtworks.com;
+package com.thoughtworks.com.json;
+
+import com.thoughtworks.com.domain.Product;
 
 import javax.ws.rs.ext.Provider;
 

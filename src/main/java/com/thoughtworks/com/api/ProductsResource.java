@@ -1,4 +1,7 @@
-package com.thoughtworks.com;
+package com.thoughtworks.com.api;
+
+import com.thoughtworks.com.domain.IProductsCatalog;
+import com.thoughtworks.com.json.ProductsRefJson;
 
 import javax.inject.Inject;
 import javax.ws.rs.GET;

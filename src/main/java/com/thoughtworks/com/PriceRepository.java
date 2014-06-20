@@ -1,5 +1,8 @@
 package com.thoughtworks.com;
 
+import com.thoughtworks.com.domain.Price;
+import com.thoughtworks.com.domain.Product;
+
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;

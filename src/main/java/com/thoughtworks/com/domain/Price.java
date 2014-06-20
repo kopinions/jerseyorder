@@ -1,4 +1,4 @@
-package com.thoughtworks.com;
+package com.thoughtworks.com.domain;
 
 import java.util.Date;
 

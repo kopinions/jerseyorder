@@ -1,5 +1,10 @@
 package com.thoughtworks.com;
 
+import com.thoughtworks.com.api.ProductsResource;
+import com.thoughtworks.com.domain.IProductsCatalog;
+import com.thoughtworks.com.domain.Product;
+import com.thoughtworks.com.domain.ProductCatalog;
+import com.thoughtworks.com.json.ProductsRefJson;
 import org.glassfish.hk2.utilities.binding.AbstractBinder;
 import org.glassfish.jersey.jackson.JacksonFeature;
 import org.glassfish.jersey.server.ResourceConfig;
