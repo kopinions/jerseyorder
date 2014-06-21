@@ -36,7 +36,7 @@ public class PricesResource {
 
     @POST
     public Response createProductPrice(@FormParam("price") double price, @FormParam("effectTime") String effectiveTime) {
-        Price savedPrice = priceRepo.save(new Price(product.getId(), new Date(effectiveTime), price));
-        return Response.created(uriInfo.getAbsolutePathBuilder().path(String.valueOf(savedPrice.getId())).build()).build();
+        int priceId = priceRepo.save(product.getId(), new Date(effectiveTime), price);
+        return Response.created(uriInfo.getAbsolutePathBuilder().path(String.valueOf(priceId)).build()).build();
     }
 }

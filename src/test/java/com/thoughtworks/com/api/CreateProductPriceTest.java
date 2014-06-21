@@ -15,7 +15,7 @@ import java.util.HashMap;
 import static org.hamcrest.CoreMatchers.endsWith;
 import static org.hamcrest.CoreMatchers.is;
 import static org.junit.Assert.assertThat;
-import static org.mockito.Matchers.anyObject;
+import static org.mockito.Matchers.*;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
 
@@ -44,9 +44,8 @@ public class CreateProductPriceTest extends JerseyTest {
         ResourceConfig resourceConfig = new ResourceConfig();
         resourceConfig.registerResources(Resource.from(ProductsResource.class));
         resourceConfig.registerResources(Resource.from(PricesResource.class));
-        Price price = new Price(1, priceEffectiveTime, 1.0, 1);
         PriceRepository mockPriceRepository = mock(PriceRepository.class);
-        when(mockPriceRepository.save(anyObject())).thenReturn(price);
+        when(mockPriceRepository.save(anyInt(), anyObject(), anyDouble())).thenReturn(1);
         ProductCatalog mockProductCatalog = mock(ProductCatalog.class);
         when(mockProductCatalog.find(1)).thenReturn(new Product("product1", 1));
         resourceConfig.register(new AbstractBinder() {

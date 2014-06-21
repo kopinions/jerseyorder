@@ -10,18 +10,18 @@ import java.util.Date;
  * To change this template use File | Settings | File Templates.
  */
 public class Price {
-    private long productId;
+    private int productId;
     private Date time;
     private double price;
     private int id;
 
-    public Price(long productId, Date time, double price) {
+    public Price(int productId, Date time, double price) {
         this.productId = productId;
         this.time = time;
         this.price = price;
     }
 
-    public Price(long productId, Date time, double price, int id) {
+    public Price(int productId, Date time, double price, int id) {
         this.productId = productId;
         this.time = time;
         this.price = price;

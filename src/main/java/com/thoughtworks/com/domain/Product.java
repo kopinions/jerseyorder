@@ -6,11 +6,11 @@ import java.util.List;
 
 public class Product {
     private String name;
-    private Long id;
+    private int id;
     private List<Price> historyPrices;
 //    private Price currentPrice;
 
-    public Product(String name, long id) {
+    public Product(String name, int id) {
         this.name = name;
         this.id = id;
         historyPrices = new ArrayList<>();
@@ -19,7 +19,7 @@ public class Product {
     public Product() {
     }
 
-    public Long getId() {
+    public int getId() {
         return id;
     }
 

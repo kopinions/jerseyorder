@@ -14,7 +14,7 @@ public class ProductsRefJson  {
         this.product = product;
     }
 
-    public Long getId() {
+    public int getId() {
         return product.getId();
     }
 }

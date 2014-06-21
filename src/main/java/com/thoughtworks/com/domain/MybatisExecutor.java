@@ -1,5 +1,6 @@
 package com.thoughtworks.com.domain;
 
+import com.thoughtworks.com.mapper.PriceMapper;
 import com.thoughtworks.com.mapper.ProductMapper;
 import org.apache.ibatis.mapping.Environment;
 import org.apache.ibatis.session.Configuration;
@@ -30,6 +31,7 @@ public class MybatisExecutor {
         Environment environment = new Environment("development", transactionFactory, source);
         Configuration configuration = new Configuration(environment);
         configuration.addMapper(ProductMapper.class);
+        configuration.addMapper(PriceMapper.class);
         sqlSessionFactory = new SqlSessionFactoryBuilder().build(configuration);
     }
 

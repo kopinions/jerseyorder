@@ -1,9 +1,5 @@
-package com.thoughtworks.com;
+package com.thoughtworks.com.domain;
 
-import com.thoughtworks.com.domain.MybatisExecutor;
-import com.thoughtworks.com.domain.Price;
-import com.thoughtworks.com.domain.Product;
-import com.thoughtworks.com.domain.ProductCatalog;
 import org.apache.ibatis.session.SqlSession;
 import org.junit.Test;
 
