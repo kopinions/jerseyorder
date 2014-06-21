@@ -5,10 +5,11 @@ import com.thoughtworks.com.domain.Price;
 import com.thoughtworks.com.domain.Product;
 import com.thoughtworks.com.json.PriceJson;
 
-import javax.ws.rs.GET;
-import javax.ws.rs.Produces;
+import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
+import javax.ws.rs.core.Response;
 import javax.ws.rs.core.UriInfo;
+import java.util.Date;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -27,9 +28,15 @@ public class PricesResource {
 
     @GET
     @Produces(MediaType.APPLICATION_JSON)
+    @Consumes(MediaType.APPLICATION_JSON)
     public List<PriceJson> productPrices() {
         List<Price> collect = priceRepo.all().stream().filter(p -> p.getProductId() == product.getId()).collect(Collectors.toList());
         return collect.stream().map(p -> new PriceJson(p)).collect(Collectors.toList());
     }
 
+    @POST
+    public Response createProductPrice(@FormParam("price") double price, @FormParam("effectTime") String effectiveTime) {
+        Price savedPrice = priceRepo.save(new Price(product.getId(), new Date(effectiveTime), price));
+        return Response.created(uriInfo.getAbsolutePathBuilder().path(String.valueOf(savedPrice.getId())).build()).build();
+    }
 }

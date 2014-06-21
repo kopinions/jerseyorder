@@ -19,9 +19,10 @@ public class ProductsResource {
     IProductsCatalog catalog;
 
     @Path("{id}/prices")
-    @Consumes(MediaType.APPLICATION_JSON)
     public PricesResource getPrices(@PathParam("id") int productId, @Context UriInfo uriInfo, @Context IPriceRepository priceRepo) {
+
         return new PricesResource(catalog.find(productId), uriInfo, priceRepo);
+
     }
 
     @GET

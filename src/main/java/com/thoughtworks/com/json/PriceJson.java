@@ -6,7 +6,7 @@ import com.thoughtworks.com.domain.Price;
 import javax.ws.rs.ext.Provider;
 
 @Provider
-public class PriceJson {
+public class    PriceJson {
     private Price price;
 
     public PriceJson(Price price) {

@@ -26,6 +26,7 @@ import static org.mockito.Mockito.when;
 
 
 public class ProductPriceResourceTest extends JerseyTest {
+
     @Test
     public void should_get_prices_of_product() {
         Response response = target("/products/1/prices").request().accept(MediaType.APPLICATION_JSON_TYPE).get();

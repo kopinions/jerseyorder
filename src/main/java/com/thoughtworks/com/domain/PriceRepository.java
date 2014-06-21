@@ -13,4 +13,9 @@ public class PriceRepository implements IPriceRepository {
     public List<Price> all() {
         return new ArrayList<>();
     }
+
+    @Override
+    public Price save(Price price) {
+        return null;  //To change body of implemented methods use File | Settings | File Templates.
+    }
 }
