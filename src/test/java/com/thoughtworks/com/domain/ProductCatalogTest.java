@@ -20,12 +20,14 @@ public class ProductCatalogTest {
         List<Price> historyPriceForProduct1 = productList.stream().filter(p -> p.getId() == 1).findFirst().get().getHistoryPrice();
         assertThat(historyPriceForProduct1.stream().allMatch(p-> p.getProductId() ==1), is(true));
     }
-//
-//    @Test
-//    public void should_find_product_by_id() {
-//        SqlSession session = new MybatisExecutor().getSession();
-//        ProductCatalog productCatalog = new ProductCatalog(session);
-//        productCatalog.create("name1");
-//            assertThat(productCatalog.find(1).getId(), is(1l));
-//    }
+
+    @Test
+    public void should_find_product_by_id() {
+
+        SqlSession session = new MybatisExecutor().getSession();
+        ProductCatalog productCatalog = new ProductCatalog(session);
+        Product product = productCatalog.find(1);
+        assertThat(product.getId(), is(1));
+        assertThat(product.getName(), is("products1"));
+    }
 }

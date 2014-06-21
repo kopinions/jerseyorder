@@ -7,5 +7,5 @@ public interface IProductsCatalog {
 
     public List<Product> getProductList();
 
-    public Product find(long id);
+    public Product find(int id);
 }

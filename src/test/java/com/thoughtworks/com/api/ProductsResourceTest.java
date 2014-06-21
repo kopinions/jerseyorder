@@ -18,7 +18,7 @@ import java.util.Map;
 import static org.hamcrest.CoreMatchers.endsWith;
 import static org.hamcrest.CoreMatchers.is;
 import static org.hamcrest.MatcherAssert.assertThat;
-import static org.mockito.Matchers.anyLong;
+import static org.mockito.Matchers.anyInt;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
 
@@ -47,7 +47,7 @@ public class ProductsResourceTest extends JerseyTest{
 
         ProductCatalog catalog = mock(ProductCatalog.class);
         when(catalog.getProductList()).thenReturn(Arrays.asList(new Product("product", 1)));
-        when(catalog.find(anyLong())).thenReturn(new Product("product", 1));
+        when(catalog.find(anyInt())).thenReturn(new Product("product", 1));
         ResourceConfig resourceConfig = new ResourceConfig(ProductsResource.class);
 
         resourceConfig.register(new AbstractBinder() {

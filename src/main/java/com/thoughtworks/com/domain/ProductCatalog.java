@@ -1,6 +1,7 @@
 package com.thoughtworks.com.domain;
 
 import com.thoughtworks.com.mapper.ProductHandler;
+import com.thoughtworks.com.mapper.ProductMapper;
 import org.apache.ibatis.session.SqlSession;
 
 import javax.ws.rs.ext.Provider;
@@ -25,8 +26,8 @@ public class ProductCatalog implements IProductsCatalog {
         return handler.all();
     }
 
-    public Product find(long id) {
-        return null;
+    public Product find(int id) {
+        return session.getMapper(ProductMapper.class).find(id);
     }
 
 
