@@ -2,6 +2,7 @@ package com.thoughtworks.com.api;
 
 import com.thoughtworks.com.domain.IPriceRepository;
 import com.thoughtworks.com.domain.IProductsCatalog;
+import com.thoughtworks.com.json.ProductJson;
 import com.thoughtworks.com.json.ProductsRefJson;
 
 import javax.inject.Inject;
@@ -27,5 +28,12 @@ public class ProductsResource {
     @Produces(MediaType.APPLICATION_JSON)
     public List<ProductsRefJson> getProductList() {
         return catalog.getProductList().stream().map(ProductsRefJson::new).collect(Collectors.toList());
+    }
+
+
+    @GET
+    @Path("{id}")
+    public ProductJson getProduct(@PathParam("id") int productId, @Context UriInfo uriInfo) {
+        return new ProductJson(catalog.find(productId), uriInfo);
     }
 }
