@@ -21,18 +21,18 @@ public class ProductHandler implements ResultHandler {
     public void handleResult(ResultContext context) {
         Object resultObject = context.getResultObject();
         ProductWithPrice pwp = (ProductWithPrice) resultObject;
-        Product product = new Product(pwp.productName, pwp.productId);
+        Product product = new Product(pwp.productId, pwp.productName);
 
-        if (allProducts.stream().anyMatch(p-> p.getId() == pwp.productId)) {
-            if(pwp.priceId <=0) {
+        if (allProducts.stream().anyMatch(p -> p.getId() == pwp.productId)) {
+            if(pwp.priceId <=0 || pwp.effectDate==null) {
                 return;
             }
             Product existProduct = allProducts.stream().filter(p->p.getId()== pwp.productId).iterator().next();
-            existProduct.addHistoryPrice(new Price(pwp.productId, pwp.time, pwp.price, pwp.priceId));
+            existProduct.addHistoryPrice(new Price(pwp.productId, pwp.effectDate, pwp.price, pwp.priceId));
 
         } else {
-            if (pwp.priceId > 0) {
-                product.addHistoryPrice(new Price(pwp.productId, pwp.time, pwp.price, pwp.priceId));
+            if (pwp.priceId > 0 && pwp.effectDate!=null) {
+                product.addHistoryPrice(new Price(pwp.productId, pwp.effectDate, pwp.price, pwp.priceId));
             }
             allProducts.add(product);
         }

@@ -1,0 +1,1 @@
+insert into prices (price, productId, effectDate) values (15.0, 1, '2014-01-01');

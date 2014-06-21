@@ -25,7 +25,7 @@ public class PriceRepository implements IPriceRepository {
 
     @Override
     public int save(int productId, Date date, double price) {
-        int price1 = session.getMapper(PriceMapper.class).createPrice(productId, price);
+        int price1 = session.getMapper(PriceMapper.class).createPrice(productId, price, date);
         session.commit(true);
         return price1;
     }

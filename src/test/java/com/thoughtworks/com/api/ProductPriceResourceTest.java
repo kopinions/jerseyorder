@@ -40,7 +40,7 @@ public class ProductPriceResourceTest extends JerseyTest {
     @Override
     protected Application configure() {
         ProductCatalog mockProductCatalog = mock(ProductCatalog.class);
-        when(mockProductCatalog.find(1)).thenReturn(new Product("product1", 1));
+        when(mockProductCatalog.find(1)).thenReturn(new Product(1, "product1"));
         PriceRepository mockPriceRepository = mock(PriceRepository.class);
         when(mockPriceRepository.all()).thenReturn(Arrays.asList(new Price(1, new Date(), 1.1), new Price(1, new Date(), 1.2)));
 
@@ -56,7 +56,7 @@ public class ProductPriceResourceTest extends JerseyTest {
             }
         });
 
-        configuration.packages().register(PriceJson.class)
+        configuration.packages("com.thoughtworks.com.json").register(PriceJson.class)
                 .register(ProductsRefJson.class)
                 .register(JacksonFeature.class);
 

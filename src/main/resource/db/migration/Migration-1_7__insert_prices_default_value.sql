@@ -1,1 +1,0 @@
-insert into prices (price, productId) values (15.0, 1);

@@ -10,6 +10,6 @@ public interface ProductMapper {
     @Select("SELECT * FROM products WHERE id = #{id}")
     Product find(@Param("id") int id);
 
-    @Select("SELECT product.id as productId, product.name as productName, price.id as priceId, price.price as price FROM products product left join prices price on product.id=price.productId")
+    @Select("SELECT product.id as productId, product.name as productName, price.id as priceId, price.price as price, price.effectDate as effectDate FROM products product left join prices price on product.id=price.productId")
     List<ProductWithPrice> all(ProductHandler handler);
 }

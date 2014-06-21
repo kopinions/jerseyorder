@@ -24,6 +24,7 @@ dependencies {
     testCompile "org.glassfish.jersey.test-framework.providers:jersey-test-framework-provider-grizzly2:$jerseyVersion"
     testCompile "org.mockito:mockito-all:$mockitoVersion"
     testCompile "junit:junit:$junitVersion"
+    testCompile "org.hamcrest:hamcrest-core:1.3"
 }
 
 buildscript {

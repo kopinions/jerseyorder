@@ -6,6 +6,6 @@ public class ProductWithPrice {
     public int productId;
     public String productName;
     public int priceId;
-    public Date time;
+    public Date effectDate;
     public double price;
 }

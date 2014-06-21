@@ -8,9 +8,9 @@ public class Product {
     private String name;
     private int id;
     private List<Price> historyPrices;
-//    private Price currentPrice;
+    private Price currentPrice;
 
-    public Product(String name, int id) {
+    public Product(int id, String name) {
         this.name = name;
         this.id = id;
         historyPrices = new ArrayList<>();
@@ -25,6 +25,7 @@ public class Product {
 
     public void addHistoryPrice(Price... price) {
         Arrays.asList(price).stream().filter(p-> !historyPrices.contains(p)).forEach(p-> historyPrices.add(p));
+        currentPrice = historyPrices.stream().max((pr1,pr2)->pr1.getEffectDate().compareTo(pr2.getEffectDate())).get();
     }
 
     public List<Price> getHistoryPrice() {
@@ -33,5 +34,9 @@ public class Product {
 
     public String getName() {
         return name;
+    }
+
+    public Price getCurrentPrice() {
+        return currentPrice;
     }
 }

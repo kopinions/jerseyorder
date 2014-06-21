@@ -1,0 +1,1 @@
+alter table prices add column effectDate timestamp ;
