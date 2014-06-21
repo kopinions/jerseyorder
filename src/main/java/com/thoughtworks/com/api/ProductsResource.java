@@ -20,9 +20,7 @@ public class ProductsResource {
 
     @Path("{id}/prices")
     public PricesResource getPrices(@PathParam("id") int productId, @Context UriInfo uriInfo, @Context IPriceRepository priceRepo) {
-
         return new PricesResource(catalog.find(productId), uriInfo, priceRepo);
-
     }
 
     @GET

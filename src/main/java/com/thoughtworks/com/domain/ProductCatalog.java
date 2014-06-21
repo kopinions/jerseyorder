@@ -20,6 +20,8 @@ public class ProductCatalog implements IProductsCatalog {
     public List<Product> getProductList() {
         ProductHandler handler = new ProductHandler();
         session.select("com.thoughtworks.com.mapper.ProductMapper.all", handler);
+//        session.getMapper(ProductMapper.class).all(handler);
+        session.commit();
         return handler.all();
     }
 

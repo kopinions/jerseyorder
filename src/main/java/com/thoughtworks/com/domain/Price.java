@@ -11,19 +11,19 @@ import java.util.Date;
  */
 public class Price {
     private int productId;
-    private Date time;
+    private Date effectDate;
     private double price;
     private int id;
 
-    public Price(int productId, Date time, double price) {
+    public Price(int productId, Date effectDate, double price) {
         this.productId = productId;
-        this.time = time;
+        this.effectDate = effectDate;
         this.price = price;
     }
 
-    public Price(int productId, Date time, double price, int id) {
+    public Price(int productId, Date effectDate, double price, int id) {
         this.productId = productId;
-        this.time = time;
+        this.effectDate = effectDate;
         this.price = price;
         this.id = id;
     }
@@ -41,5 +41,9 @@ public class Price {
 
     public int getId() {
         return id;
+    }
+
+    public Date getEffectDate() {
+        return effectDate;
     }
 }
