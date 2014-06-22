@@ -29,4 +29,11 @@ public class PriceRepository implements IPriceRepository {
         session.commit(true);
         return price1;
     }
+
+    @Override
+    public List<Price> getPrices(int productId) {
+        List<Price> prices = session.getMapper(PriceMapper.class).getPrice(productId);
+        session.commit(true);
+        return prices;
+    }
 }

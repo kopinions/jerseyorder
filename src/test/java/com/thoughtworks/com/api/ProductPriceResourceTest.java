@@ -9,23 +9,37 @@ import org.glassfish.jersey.jackson.JacksonFeature;
 import org.glassfish.jersey.server.ResourceConfig;
 import org.glassfish.jersey.server.model.Resource;
 import org.glassfish.jersey.test.JerseyTest;
+import org.junit.Before;
 import org.junit.Test;
 
 import javax.ws.rs.core.Application;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
+import java.text.SimpleDateFormat;
 import java.util.Arrays;
 import java.util.Date;
 import java.util.List;
 import java.util.Map;
 
+import static org.hamcrest.CoreMatchers.endsWith;
 import static org.hamcrest.CoreMatchers.is;
 import static org.junit.Assert.assertThat;
+import static org.mockito.Matchers.anyInt;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
 
 
 public class ProductPriceResourceTest extends JerseyTest {
+
+
+    @Override
+    @Before
+    public void setUp() throws Exception {
+        super.setUp();
+    }
+
+    Date effectDate;
+
 
     @Test
     public void should_get_prices_of_product() {
@@ -34,15 +48,19 @@ public class ProductPriceResourceTest extends JerseyTest {
         List allPrices = response.readEntity(List.class);
         assertThat(allPrices.size(), is(2));
         Map<String, Object> firstPrice = (Map<String, Object>) allPrices.get(0);
-        assertThat(firstPrice.get("productId").toString(), is("1"));
+        assertThat(firstPrice.get("uri").toString(), endsWith("prices/1"));
+        SimpleDateFormat dateFormatter = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss a Z");
+        assertThat(firstPrice.get("effectDate").toString(), is(dateFormatter.format(effectDate)));
+        assertThat(firstPrice.get("price"), is(1.1));
     }
 
     @Override
     protected Application configure() {
+        effectDate = new Date();
         ProductCatalog mockProductCatalog = mock(ProductCatalog.class);
-        when(mockProductCatalog.find(1)).thenReturn(new Product(1, "product1"));
+        when(mockProductCatalog.find(1)).thenReturn(new Product(1, "product1", "location"));
         PriceRepository mockPriceRepository = mock(PriceRepository.class);
-        when(mockPriceRepository.all()).thenReturn(Arrays.asList(new Price(1, new Date(), 1.1), new Price(1, new Date(), 1.2)));
+        when(mockPriceRepository.getPrices(anyInt())).thenReturn(Arrays.asList(new Price(1, effectDate, 1.1, 1), new Price(2, effectDate, 1.2, 1)));
 
         ResourceConfig configuration = new ResourceConfig();
         configuration.registerResources(Resource.from(ProductsResource.class));

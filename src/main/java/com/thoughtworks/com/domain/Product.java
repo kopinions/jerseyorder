@@ -9,18 +9,20 @@ public class Product {
     private int id;
     private List<Price> historyPrices;
     private Price currentPrice;
+    private String location;
 
-    public Product(int id, String name) {
+    public Product(int id, String name, String location) {
         this.name = name;
         this.id = id;
+        this.location = location;
         historyPrices = new ArrayList<>();
-    }
-
-    public Product() {
     }
 
     public int getId() {
         return id;
+    }
+
+    public Product() {
     }
 
     public void addHistoryPrice(Price... price) {
@@ -38,5 +40,9 @@ public class Product {
 
     public Price getCurrentPrice() {
         return currentPrice;
+    }
+
+    public String getLocation() {
+        return location;
     }
 }

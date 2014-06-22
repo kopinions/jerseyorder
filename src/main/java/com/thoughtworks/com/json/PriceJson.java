@@ -3,21 +3,36 @@ package com.thoughtworks.com.json;
 
 import com.thoughtworks.com.domain.Price;
 
-public class PriceJson {
-    private Price price;
+import javax.ws.rs.core.UriInfo;
+import java.net.URI;
+import java.text.SimpleDateFormat;
 
-    public PriceJson(Price price) {
+public class PriceJson {
+    private SimpleDateFormat dateFormatter;
+    private Price price;
+    private UriInfo uriInfo;
+
+    public PriceJson(Price price, UriInfo uriInfo) {
         this.price = price;
+        this.uriInfo = uriInfo;
+        dateFormatter = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss a Z");
     }
 
     public PriceJson() {
+        dateFormatter = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss a Z");
     }
 
     public double getPrice() {
         return price.getPrice();
     }
 
-    public long getProductId() {
-        return price.getProductId();
+    public URI getUri() {
+        return uriInfo.getAbsolutePathBuilder().path(String.valueOf(price.getId())).build();
     }
+
+
+    public String getEffectDate() {
+        return dateFormatter.format(price.getEffectDate());
+    }
+
 }

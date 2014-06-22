@@ -9,6 +9,7 @@ import org.junit.Test;
 
 import javax.ws.rs.client.Entity;
 import javax.ws.rs.core.*;
+import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.HashMap;
 
@@ -22,18 +23,12 @@ import static org.mockito.Mockito.when;
 public class CreateProductPriceTest extends JerseyTest {
 
     Date priceEffectiveTime = new Date();
-
-    class CreatePriceRquest{
-        int productId;
-        double price;
-        Date effectTime;
-    }
-
     @Test
     public void should_create_price_for_product_and_get_price_uri_in_location() {
+        SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss a Z");
         MultivaluedMap<String, String> post = new MultivaluedHashMap<>();
         post.putSingle("price", "1.0");
-        post.putSingle("effectTime", priceEffectiveTime.toString());
+        post.putSingle("effectTime", dateFormat.format(priceEffectiveTime));
         Response response = target("/products/1/prices").request().accept(MediaType.WILDCARD_TYPE).post(Entity.form(post));
         assertThat(response.getStatus(), is(201));
         assertThat(response.getLocation().toASCIIString(), endsWith("/products/1/prices/1"));
@@ -47,7 +42,7 @@ public class CreateProductPriceTest extends JerseyTest {
         PriceRepository mockPriceRepository = mock(PriceRepository.class);
         when(mockPriceRepository.save(anyInt(), anyObject(), anyDouble())).thenReturn(1);
         ProductCatalog mockProductCatalog = mock(ProductCatalog.class);
-        when(mockProductCatalog.find(1)).thenReturn(new Product(1, "product1"));
+        when(mockProductCatalog.find(1)).thenReturn(new Product(1, "product1", "location"));
         resourceConfig.register(new AbstractBinder() {
             @Override
             protected void configure() {
@@ -60,6 +55,4 @@ public class CreateProductPriceTest extends JerseyTest {
 
         return resourceConfig;
     }
-
-
 }

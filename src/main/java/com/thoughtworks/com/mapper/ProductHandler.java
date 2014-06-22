@@ -21,18 +21,18 @@ public class ProductHandler implements ResultHandler {
     public void handleResult(ResultContext context) {
         Object resultObject = context.getResultObject();
         ProductWithPrice pwp = (ProductWithPrice) resultObject;
-        Product product = new Product(pwp.productId, pwp.productName);
+        Product product = new Product(pwp.productId, pwp.productName, pwp.productLocation);
 
         if (allProducts.stream().anyMatch(p -> p.getId() == pwp.productId)) {
             if(pwp.priceId <=0 || pwp.effectDate==null) {
                 return;
             }
             Product existProduct = allProducts.stream().filter(p->p.getId()== pwp.productId).iterator().next();
-            existProduct.addHistoryPrice(new Price(pwp.productId, pwp.effectDate, pwp.price, pwp.priceId));
+            existProduct.addHistoryPrice(new Price(pwp.priceId, pwp.effectDate, pwp.price, pwp.productId));
 
         } else {
             if (pwp.priceId > 0 && pwp.effectDate!=null) {
-                product.addHistoryPrice(new Price(pwp.productId, pwp.effectDate, pwp.price, pwp.priceId));
+                product.addHistoryPrice(new Price(pwp.priceId, pwp.effectDate, pwp.price, pwp.productId));
             }
             allProducts.add(product);
         }
@@ -40,5 +40,10 @@ public class ProductHandler implements ResultHandler {
 
     public List<Product> all() {
         return allProducts;
+    }
+
+    public Product find() {
+        return allProducts.stream().iterator().next();
+//     return allProducts.stream().iterator().next();
     }
 }

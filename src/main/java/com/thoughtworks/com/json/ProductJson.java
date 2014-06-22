@@ -4,8 +4,6 @@ import com.thoughtworks.com.domain.Product;
 
 import javax.ws.rs.core.UriInfo;
 import java.net.URI;
-import java.util.HashMap;
-import java.util.Map;
 
 public class ProductJson{
     private Product product;
@@ -29,10 +27,12 @@ public class ProductJson{
         return product.getName();
     }
 
-    public Map<String, Object> getPrice() {
-        HashMap<String, Object> priceMap = new HashMap<>();
-        priceMap.put("price", product.getCurrentPrice().getPrice());
-        priceMap.put("productId", product.getId());
-        return priceMap;
+
+    public PriceRefJson getPrice() {
+        return new PriceRefJson(product.getCurrentPrice(), uriInfo.getRequestUriBuilder().path(String.valueOf(product.getId())));
+    }
+
+    public String getLocation() {
+        return product.getLocation();
     }
 }

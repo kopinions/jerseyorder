@@ -26,13 +26,14 @@ public class ProductsResource {
 
     @GET
     @Produces(MediaType.APPLICATION_JSON)
-    public List<ProductsRefJson> getProductList() {
-        return catalog.getProductList().stream().map(ProductsRefJson::new).collect(Collectors.toList());
+    public List<ProductsRefJson> getProductList(@Context UriInfo uriInfo) {
+        return catalog.getProductList().stream().map(p-> new ProductsRefJson(p, uriInfo)).collect(Collectors.toList());
     }
 
 
     @GET
     @Path("{id}")
+    @Produces(MediaType.APPLICATION_JSON)
     public ProductJson getProduct(@PathParam("id") int productId, @Context UriInfo uriInfo) {
         return new ProductJson(catalog.find(productId), uriInfo);
     }

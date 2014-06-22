@@ -21,13 +21,16 @@ public class ProductCatalog implements IProductsCatalog {
     public List<Product> getProductList() {
         ProductHandler handler = new ProductHandler();
         session.select("com.thoughtworks.com.mapper.ProductMapper.all", handler);
-//        session.getMapper(ProductMapper.class).all(handler);
+        session.getMapper(ProductMapper.class).all(handler);
         session.commit();
         return handler.all();
     }
 
     public Product find(int id) {
-        return session.getMapper(ProductMapper.class).find(id);
+        ProductHandler handler = new ProductHandler();
+        session.select("com.thoughtworks.com.mapper.ProductMapper.find", id, handler);
+        session.commit();
+        return handler.find();
     }
 
 

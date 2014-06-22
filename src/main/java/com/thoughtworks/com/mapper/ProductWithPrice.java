@@ -8,4 +8,5 @@ public class ProductWithPrice {
     public int priceId;
     public Date effectDate;
     public double price;
+    public String productLocation;
 }

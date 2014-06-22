@@ -15,13 +15,7 @@ public class Price {
     private double price;
     private int id;
 
-    public Price(int productId, Date effectDate, double price) {
-        this.productId = productId;
-        this.effectDate = effectDate;
-        this.price = price;
-    }
-
-    public Price(int productId, Date effectDate, double price, int id) {
+    public Price(int id, Date effectDate, double price, int productId) {
         this.productId = productId;
         this.effectDate = effectDate;
         this.price = price;

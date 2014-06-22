@@ -17,11 +17,14 @@ import org.glassfish.jersey.test.JerseyTest;
 import javax.ws.rs.core.Application;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
-import java.util.*;
+import java.util.Arrays;
+import java.util.Date;
+import java.util.List;
+import java.util.Map;
 
-import static org.hamcrest.CoreMatchers.is;
 import static org.hamcrest.CoreMatchers.endsWith;
-import static org.hamcrest.MatcherAssert.assertThat;
+import static org.hamcrest.CoreMatchers.is;
+import static org.junit.Assert.assertThat;
 import static org.mockito.Matchers.anyInt;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
@@ -32,9 +35,15 @@ public class ProductsResourceTest extends JerseyTest{
     public void should_get_product() {
         Response response = target("/products").request().accept(MediaType.APPLICATION_JSON_TYPE).get();
         assertThat(response.getStatus(), is(200));
+//        System.out.println(response.readEntity(String.class));
         List list = response.readEntity(List.class);
-        Map<String, Integer> a = (HashMap<String, Integer>)list.get(0);
-        assertThat(a.get("id"), is(1));
+        Map<String, Object> a = (Map<String, Object>) list.get(0);
+        assertThat(a.get("uri").toString(), endsWith("/products/1"));
+        assertThat(a.get("name").toString(), is("product"));
+        assertThat(a.get("location").toString(), is("location"));
+        Map<String, Object> price= (Map<String, Object>) a.get("price");
+        assertThat(price.get("uri").toString(), endsWith("prices/1"));
+
     }
 
     @org.junit.Test
@@ -44,15 +53,16 @@ public class ProductsResourceTest extends JerseyTest{
         Map product = response.readEntity(Map.class);
         assertThat(product.get("uri").toString(), endsWith("/products/1"));
         assertThat(product.get("name").toString(), is("product"));
+        assertThat(product.get("location").toString(), is("location"));
         Map<String, Object> price = (Map<String, Object>) product.get("price");
-        assertThat(price.get("productId").toString(), is("1"));
+        assertThat(price.get("price").toString(), is("1.0"));
     }
 
     @Override
     protected Application configure() {
 
         ProductCatalog catalog = mock(ProductCatalog.class);
-        Product product = new Product(1, "product");
+        Product product = new Product(1, "product", "location");
         product.addHistoryPrice(new Price(1, new Date(), 1, 1));
         when(catalog.getProductList()).thenReturn(Arrays.asList(product));
         when(catalog.find(anyInt())).thenReturn(product);
