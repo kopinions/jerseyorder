@@ -14,4 +14,7 @@ public interface IProductsCatalog {
     int createProductPrice(@Param("product") Product product, @Param("price") Price price);
 
     List<Price> getProductPrices(@Param("product") Product product);
+
+
+    int createProduct(@Param("product") Product product);
 }

@@ -42,9 +42,14 @@
     </select>
 
 
-    <insert id="createProductPrice" statementType="PREPARED" useGeneratedKeys="true" keyColumn="id" parameterType="com.thoughtworks.com.domain.Price">
+    <insert id="createProductPrice" statementType="PREPARED" useGeneratedKeys="true" keyProperty="price.id" keyColumn="id"
+            parameterType="com.thoughtworks.com.domain.Price">
       insert into prices (productId, price, effectDate) values (#{product.id}, #{price.price}, #{price.effectDate});
     </insert>
 
-</mapper>
 
+    <insert id="createProduct" statementType="PREPARED" useGeneratedKeys="true" keyProperty="product.id" keyColumn="id"
+            parameterType="com.thoughtworks.com.domain.Product">
+        insert into products (name, location) values (#{product.name}, #{product.location})
+    </insert>
+</mapper>

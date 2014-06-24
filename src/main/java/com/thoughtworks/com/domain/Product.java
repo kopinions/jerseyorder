@@ -18,6 +18,11 @@ public class Product {
         historyPrices = new ArrayList<>();
     }
 
+    public Product(String location, String name) {
+        this.location = location;
+        this.name = name;
+    }
+
     public int getId() {
         return id;
     }

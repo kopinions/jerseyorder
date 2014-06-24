@@ -1,6 +1,7 @@
 package com.thoughtworks.com.domain;
 
 import org.apache.ibatis.session.SqlSession;
+import org.junit.Before;
 import org.junit.Test;
 
 import java.util.Date;
@@ -11,6 +12,11 @@ import static org.hamcrest.CoreMatchers.is;
 import static org.junit.Assert.assertThat;
 
 public class PriceRepositoryTest {
+    @Before
+    public void setUp() throws Exception {
+
+
+    }
 
     @Test
     public void should_save_price_in_storage() {

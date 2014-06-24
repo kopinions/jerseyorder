@@ -14,7 +14,7 @@ public class ProductCatalogTest {
         SqlSession session = new MybatisExecutor().getSession();
         IProductsCatalog mapper = session.getMapper(IProductsCatalog.class);
         List<Product> productList = mapper.getProductList();
-        assertThat(productList.size(), is(3));
+        assertThat(productList.size()>0, is(true));
         assertThat(productList.stream().anyMatch(p -> p.getId() == 1), is(true));
     }
 
@@ -25,5 +25,14 @@ public class ProductCatalogTest {
         Product product = mapper.find(1);
         assertThat(product.getId(), is(1));
         assertThat(product.getName(), is("products1"));
+    }
+
+    @Test
+    public void should_create_product() {
+        SqlSession session = new MybatisExecutor().getSession();
+        IProductsCatalog mapper = session.getMapper(IProductsCatalog.class);
+        Product product = new Product("product1", "beijing");
+        mapper.createProduct(product);
+        assertThat(product.getId()>1, is(true));
     }
 }
