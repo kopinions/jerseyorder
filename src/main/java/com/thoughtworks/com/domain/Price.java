@@ -22,6 +22,12 @@ public class Price {
         this.id = id;
     }
 
+    public Price(double price, Date effectDate, int productId) {
+        this.price = price;
+        this.effectDate = effectDate;
+        this.productId = productId;
+    }
+
     public Price() {
     }
 
@@ -40,4 +46,6 @@ public class Price {
     public Date getEffectDate() {
         return effectDate;
     }
+
+
 }

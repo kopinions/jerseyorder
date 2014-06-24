@@ -57,9 +57,9 @@ public class ProductPriceResourceTest extends JerseyTest {
     @Override
     protected Application configure() {
         effectDate = new Date();
-        ProductCatalog mockProductCatalog = mock(ProductCatalog.class);
+        IProductsCatalog mockProductCatalog = mock(IProductsCatalog.class);
         when(mockProductCatalog.find(1)).thenReturn(new Product(1, "product1", "location"));
-        PriceRepository mockPriceRepository = mock(PriceRepository.class);
+        IPriceRepository mockPriceRepository = mock(IPriceRepository.class);
         when(mockPriceRepository.getPrices(anyInt())).thenReturn(Arrays.asList(new Price(1, effectDate, 1.1, 1), new Price(2, effectDate, 1.2, 1)));
 
         ResourceConfig configuration = new ResourceConfig();

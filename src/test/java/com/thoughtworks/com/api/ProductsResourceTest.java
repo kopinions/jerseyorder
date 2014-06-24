@@ -3,7 +3,6 @@ package com.thoughtworks.com.api;
 import com.thoughtworks.com.domain.IProductsCatalog;
 import com.thoughtworks.com.domain.Price;
 import com.thoughtworks.com.domain.Product;
-import com.thoughtworks.com.domain.ProductCatalog;
 import com.thoughtworks.com.json.PriceJson;
 import com.thoughtworks.com.json.PriceRefJson;
 import com.thoughtworks.com.json.ProductJson;
@@ -61,7 +60,7 @@ public class ProductsResourceTest extends JerseyTest{
     @Override
     protected Application configure() {
 
-        ProductCatalog catalog = mock(ProductCatalog.class);
+        IProductsCatalog catalog = mock(IProductsCatalog.class);
         Product product = new Product(1, "product", "location");
         product.addHistoryPrice(new Price(1, new Date(), 1, 1));
         when(catalog.getProductList()).thenReturn(Arrays.asList(product));

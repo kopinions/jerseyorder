@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.thoughtworks.com.domain.IProductsCatalog">
+    <resultMap id="productDetail" type="com.thoughtworks.com.domain.Product">
+        <id property="id" column="productId"/>
+        <result property="name" column="pname"/>
+        <result property="location" column="plocation"/>
+        <association property="currentPrice" javaType="com.thoughtworks.com.domain.Price">
+            <id property="id" column="priceId"/>
+            <result property="price" column="price"/>
+            <result property="effectDate" column="effectdate"/>
+        </association>
+    </resultMap>
+    <select id="find" resultMap="productDetail" parameterType="int">
+        select
+        p.id as productId,
+        p.name as pname,
+        p.location as plocation,
+        price.id as priceId,
+        price.price as price,
+        price.effectDate as effectdate
+        from products p
+        left join prices price
+        on p.id = price.productId
+        where p.id=#{id}
+        order by price.effectdate desc limit 1
+    </select>
+
+    <select id="getProductList" resultMap="productDetail" parameterType="int">
+        select
+        p.id as productId,
+        p.name as pname,
+        p.location as plocation,
+        price.id as priceId,
+        price.price as price,
+        price.effectDate as effectDate
+        from products p
+        left join prices price
+        on p.id = price.productId
+    </select>
+
+
+    <insert id="createProductPrice" statementType="PREPARED" useGeneratedKeys="true" keyColumn="id" parameterType="com.thoughtworks.com.domain.Price">
+      insert into prices (productId, price, effectDate) values (#{product.id}, #{price.price}, #{price.effectDate});
+    </insert>
+
+</mapper>
+

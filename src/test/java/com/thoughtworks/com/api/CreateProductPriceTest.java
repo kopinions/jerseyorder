@@ -39,9 +39,9 @@ public class CreateProductPriceTest extends JerseyTest {
         ResourceConfig resourceConfig = new ResourceConfig();
         resourceConfig.registerResources(Resource.from(ProductsResource.class));
         resourceConfig.registerResources(Resource.from(PricesResource.class));
-        PriceRepository mockPriceRepository = mock(PriceRepository.class);
+        IPriceRepository mockPriceRepository = mock(IPriceRepository.class);
         when(mockPriceRepository.save(anyInt(), anyObject(), anyDouble())).thenReturn(1);
-        ProductCatalog mockProductCatalog = mock(ProductCatalog.class);
+        IProductsCatalog mockProductCatalog = mock(IProductsCatalog.class);
         when(mockProductCatalog.find(1)).thenReturn(new Product(1, "product1", "location"));
         resourceConfig.register(new AbstractBinder() {
             @Override

@@ -2,12 +2,11 @@ package com.thoughtworks.com;
 
 import com.thoughtworks.com.api.PricesResource;
 import com.thoughtworks.com.api.ProductsResource;
-import com.thoughtworks.com.domain.*;
+import com.thoughtworks.com.domain.MybatisExecutor;
 import com.thoughtworks.com.json.PriceJson;
 import com.thoughtworks.com.json.ProductsRefJson;
 import org.apache.ibatis.session.SqlSession;
 import org.glassfish.grizzly.http.server.HttpServer;
-import org.glassfish.hk2.utilities.binding.AbstractBinder;
 import org.glassfish.jersey.grizzly2.httpserver.GrizzlyHttpServerFactory;
 import org.glassfish.jersey.jackson.JacksonFeature;
 import org.glassfish.jersey.server.ResourceConfig;
@@ -21,21 +20,21 @@ public class Server {
 
     public static void main(String [] args) {
         SqlSession session = new MybatisExecutor().getSession();
-        ProductCatalog mockProductCatalog = new ProductCatalog(session);
-        PriceRepository mockPriceRepository = new PriceRepository(session);
+//        IProductCatalog mockProductCatalog = new ProductCatalog(session);
+//        IPriceRepository mockPriceRepository = new PriceRepository(session);
 
 
         ResourceConfig configuration = new ResourceConfig();
         configuration.registerResources(Resource.from(ProductsResource.class));
         configuration.registerResources(Resource.from(PricesResource.class));
 
-        configuration.register(new AbstractBinder() {
-            @Override
-            protected void configure() {
-                bind(mockPriceRepository).to(IPriceRepository.class);
-                bind(mockProductCatalog).to(IProductsCatalog.class);
-            }
-        });
+//        configuration.register(new AbstractBinder() {
+//            @Override
+//            protected void configure() {
+//                bind(mockPriceRepository).to(IPriceRepository.class);
+//                bind(mockProductCatalog).to(IProductsCatalog.class);
+//            }
+//        });
 
         configuration.packages("com.thoughtworks.com.json").register(PriceJson.class)
                 .register(ProductsRefJson.class)
