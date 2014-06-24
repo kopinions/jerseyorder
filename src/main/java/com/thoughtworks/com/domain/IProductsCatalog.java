@@ -5,8 +5,6 @@ import org.apache.ibatis.annotations.Param;
 import java.util.List;
 
 public interface IProductsCatalog {
-    public Product create(String name);
-
     public List<Product> getProductList();
 
     public Product find(int id);
@@ -14,7 +12,6 @@ public interface IProductsCatalog {
     int createProductPrice(@Param("product") Product product, @Param("price") Price price);
 
     List<Price> getProductPrices(@Param("product") Product product);
-
 
     int createProduct(@Param("product") Product product);
 }

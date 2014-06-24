@@ -12,21 +12,22 @@ import static org.hamcrest.CoreMatchers.is;
 import static org.junit.Assert.assertThat;
 
 public class PriceRepositoryTest {
+    SqlSession session;
+
     @Before
     public void setUp() throws Exception {
-
-
+        session = new MybatisExecutor().getSession();
     }
 
     @Test
     public void should_save_price_in_storage() {
-        SqlSession session = new MybatisExecutor().getSession();
         IProductsCatalog productsCatalog = session.getMapper(IProductsCatalog.class);
         Date date = new Date();
-        int priceId = productsCatalog.createProductPrice(productsCatalog.find(1), new Price(1.0, date,1));
-
+        Price price = new Price(1.0, date, 1);
+        productsCatalog.createProductPrice(productsCatalog.find(1), price);
+        assertThat(price.getId()>0, is(true));
         List < Price > prices = productsCatalog.getProductList().stream().filter(p -> p.getId() == 1).map(Product::getCurrentPrice).collect(toList());
-        assertThat(prices.stream().anyMatch(p -> p.getEffectDate().compareTo(date)==0), is(true));
+        assertThat(prices.stream().anyMatch(p -> p.getEffectDate().compareTo(date) == 0), is(true));
         session.close();
     }
 }

@@ -7,4 +7,3 @@
         SELECT * FROM prices WHERE productId = #{product.id}
     </select>
 </mapper>
-

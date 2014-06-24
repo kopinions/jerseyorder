@@ -52,4 +52,5 @@
             parameterType="com.thoughtworks.com.domain.Product">
         insert into products (name, location) values (#{product.name}, #{product.location})
     </insert>
+
 </mapper>
